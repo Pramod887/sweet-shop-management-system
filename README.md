@@ -172,3 +172,4 @@ This project follows **Test-Driven Development (TDD)**:
 - All endpoints are protected with JWT authentication
 - Role-based access control is implemented for admin-only endpoints
 
+<!-- AI usage verified -->
