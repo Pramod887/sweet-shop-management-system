@@ -1,38 +1,42 @@
-# Sweet Shop Management System
+Sweet Shop Management System
 
-A full-stack application for managing a sweet shop, built with FastAPI (backend) and React (frontend).
+A full-stack web application for managing a sweet shop, built using FastAPI for the backend and React with Vite for the frontend. The system supports secure authentication, inventory management, purchasing workflows, and admin-level controls using role-based access.
 
-## Project Overview
+Project Overview
 
-This system allows users to:
-- Register and login
-- View and search sweets
-- Purchase sweets (if stock available)
+The Sweet Shop Management System is designed to manage the daily operations of a sweet shop in a simple and efficient way. Users can register, log in, browse available sweets, search based on different criteria, and purchase sweets depending on stock availability.
 
-Admins can:
-- Add, update, and delete sweets
-- Restock sweets
+Admin users have additional privileges such as adding new sweets, updating existing ones, deleting sweets, and restocking inventory. The application follows RESTful API design principles and ensures secure access using JWT-based authentication.
 
-## Tech Stack
+Tech Stack
+Backend
 
-### Backend
-- Python 3.10+
-- FastAPI
-- SQLAlchemy (ORM)
-- SQLite (database)
-- Pytest (testing)
-- JWT Authentication
+Python 3.10+
 
-### Frontend
-- React 18
-- Vite
-- Axios
-- React Router DOM
-- Simple CSS
+FastAPI
 
-## Project Structure
+SQLAlchemy (ORM)
 
-```
+SQLite (persistent database)
+
+JWT Authentication
+
+Pytest for testing
+
+Frontend
+
+React 18
+
+Vite
+
+Axios
+
+React Router DOM
+
+CSS
+
+Project Structure
+
 sweet-shop/
 ├── backend/
 │   ├── app/
@@ -45,7 +49,7 @@ sweet-shop/
 │   │   ├── inventory/
 │   │   └── core/
 │   ├── requirements.txt
-│   └── README.md
+│   └── create_admin.py
 ├── frontend/
 │   ├── src/
 │   │   ├── api/
@@ -54,122 +58,144 @@ sweet-shop/
 │   │   ├── App.jsx
 │   │   └── main.jsx
 │   ├── package.json
-│   └── README.md
+│   └── vite.config.js
 └── README.md
-```
+Prerequisites
 
-## Getting Started
+Python 3.10 or higher
+Node.js 18 or higher
+npm
 
-### Backend Setup
-
-1. Navigate to backend directory:
-```bash
+Backend Setup and Run (FastAPI)
+Open a terminal and run the following commands:
+# Navigate to backend directory
 cd backend
-```
-
-2. Create virtual environment:
-```bash
+# Create virtual environment (skip if already exists)
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
 
-3. Install dependencies:
-```bash
+# Activate virtual environment
+# On Windows:
+venv\Scripts\activate
+
+# On Linux or Mac:
+# source venv/bin/activate
+
+# Install dependencies
 pip install -r requirements.txt
-```
-
-4. Run the server:
-```bash
+# Run the FastAPI server
 uvicorn app.main:app --reload
-```
+Backend will run on:
 
-Backend will run on `http://localhost:8000`
-
-### Frontend Setup
-
-1. Navigate to frontend directory:
-```bash
+Frontend Setup and Run (React + Vite)
+Open a new terminal and run:
+# Navigate to frontend directory
 cd frontend
-```
-
-2. Install dependencies:
-```bash
+# Install dependencies
 npm install
-```
-
-3. Start development server:
-```bash
+# Run development server
 npm run dev
-```
+Frontend will run on:
 
-Frontend will run on `http://localhost:5173`
+# Default Admin Credentials (For Testing)
 
-## API Endpoints
+Use the following credentials to access admin features such as adding, updating, deleting, and restocking sweets:
 
-### Authentication
-- `POST /api/auth/register` - Register user
-- `POST /api/auth/login` - Login user
+Email: admin@admin.com
 
-### Sweets
-- `POST /api/sweets` - Add sweet (Admin)
-- `GET /api/sweets` - View all sweets (User/Admin)
-- `GET /api/sweets/search?query=...` - Search sweets (User/Admin)
-- `PUT /api/sweets/{id}` - Update sweet (Admin)
-- `DELETE /api/sweets/{id}` - Delete sweet (Admin)
+Password: 123456
 
-### Inventory
-- `POST /api/sweets/{id}/purchase` - Purchase sweet (User/Admin)
-- `POST /api/sweets/{id}/restock` - Restock sweet (Admin)
+These credentials are provided for demo and testing purposes only. In a real production environment, credentials should be managed securely and never hard-coded.
 
-## Testing
+Optional: Create Admin User Manually
 
-### Backend Tests
-```bash
+If the admin user does not exist, you can create one manually after starting the backend.
+
+Make sure the virtual environment is activated and run:
+
+# Application Flow Summary
+
+Start the backend server first.
+
+Start the frontend development server in a separate terminal.
+
+Open http://localhost:5173
+ in your browser.
+
+The frontend automatically communicates with the backend API running on port 8000
+
+# Roles and Permissions
+USER
+
+View all sweets
+
+Search sweets
+
+Purchase sweets
+
+ADMIN
+
+Add sweets
+
+Update sweet details
+
+Delete sweets
+
+Restock sweets
+
+Perform all user-level actions
+
+# API Endpoints
+Authentication
+
+POST /api/auth/register – Register a new user
+POST /api/auth/login – Login user
+
+# Sweets
+
+POST /api/sweets – Add a sweet (Admin only)
+GET /api/sweets – View all sweets
+GET /api/sweets/search – Search sweets
+PUT /api/sweets/{id} – Update sweet details (Admin only)
+DELETE /api/sweets/{id} – Delete a sweet (Admin only)
+
+# Inventory
+
+POST /api/sweets/{id}/purchase – Purchase a sweet
+POST /api/sweets/{id}/restock – Restock a sweet (Admin only)
+
+# Testing
+Backend tests are written using Pytest.
 cd backend
 pytest
-```
 
-Tests follow TDD (Test-Driven Development) approach:
-1. Write test (FAIL)
-2. Write code (PASS)
-3. Refactor
+# Test-Driven Development Approach
 
-## Database
+Write a failing test
 
-The application uses SQLite. The database file (`sweet_shop.db`) will be created automatically in the backend directory when you first run the application.
+Implement the required functionality
 
-## Authentication
+Refactor the code while keeping tests passing
 
-The system uses JWT (JSON Web Tokens) for authentication. Tokens are sent in the `Authorization` header:
-```
-Authorization: Bearer <token>
-```
+# Database
 
-## Roles
+The application uses SQLite for data persistence. The database file is created automatically when the backend is run for the first time. The system does not rely on in-memory storage.
 
-- **USER**: Can view sweets, search, and purchase
-- **ADMIN**: Can manage sweets (add, update, delete, restock) and perform all user actions
+# My AI Usage
 
-## Development Approach
+AI tools such as ChatGPT were used during development for:
 
-This project follows **Test-Driven Development (TDD)**:
-- Tests are written before implementation
-- Each feature has corresponding tests
-- Code is refactored after tests pass
+Understanding project requirements
 
-## My AI Usage
+Generating initial boilerplate suggestions
 
-- Used ChatGPT for project structure guidance
-- Used AI for basic boilerplate suggestions
-- All business logic and validation written and reviewed manually
-- AI helped speed up development but did not replace understanding
+# Improving documentation and test cases
 
-## Notes
+All business logic, validations, and architectural decisions were implemented and reviewed manually. AI tools assisted productivity but did not replace understanding.
 
-- This project focuses on correctness and clarity, not fancy UI
-- Beginner-level code is acceptable and expected
-- The system uses real SQLite database (not in-memory)
-- All endpoints are protected with JWT authentication
-- Role-based access control is implemented for admin-only endpoints
+# Notes
 
-<!-- AI usage verified -->
+The user interface is intentionally kept simple to focus on functionality.
+
+The project emphasizes clean architecture and readable code.
+
+Suitable for interviews, assignments, and learning purposes.
